@@ -125,7 +125,7 @@ class Video < ActiveRecord::Base
   end
 
   def export_cover
-    self.cover.gsub('http://7u2lac.com1.z0.glb.clouddn.com/','')
+    self.cover.gsub('http://ol8z9wt4e.bkt.clouddn.com/','')
   end
 
   def self.to_csv(videos)

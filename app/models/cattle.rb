@@ -21,6 +21,7 @@ class Cattle < ActiveRecord::Base
     list_policy = Qiniu::Storage::ListPolicy.new(bucket,limit,prefix)
     code,result,headers = Qiniu::Storage.list(list_policy)
     return result['items'].size
+    # return 0
   end
 
   #将文件缓存到本地磁盘，生成新的名称和地址
@@ -68,7 +69,7 @@ class Cattle < ActiveRecord::Base
 
   #上传到七牛云服务器
   def self.upload_yun(name,path)
-    put_policy = Qiniu::Auth::PutPolicy.new('meteor',name) #服务器文件名称
+    put_policy = Qiniu::Auth::PutPolicy.new('video',name) #服务器文件名称
     code, result, response = Qiniu::Storage.upload_with_put_policy(put_policy, path)
     file_url = Settings.qiniu_cdn_host+name
   end

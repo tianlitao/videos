@@ -1,10 +1,9 @@
 #source 'https://gems.ruby-china.org'  #Ruby-China源
-source 'https://rubygems.org/'  #官方源
+source 'https://gems.ruby-china.org'  #官方源
 
 gem 'rails', '4.2.5'
-gem 'pg', '0.18.4'  # postgresql 数据连接
+gem 'mysql2'  # postgresql 数据连接
 gem 'will_paginate', '3.0.7'   #数据分页
-gem 'faraday', '0.9.2' #HTTP post 、get 请求
 gem 'devise','3.5.2' #用户模块
 gem 'spring', '1.4.1' # Rails application preloader 预加载
 gem 'fume-settable', '0.0.3' #a simple settings plugin for read on yaml, ruby, database, etc
@@ -20,6 +19,7 @@ gem 'listen', '3.0.8'
 gem 'puma', '3.6.0' #Server
 gem 'lograge', '0.4.1'
 gem 'json', '1.8.3'
+gem 'faraday'
 # gem 'newrelic_rpm', '3.14.0.305' #网站性能监测
 # gem 'oneapm_rpm', '1.3.4'
 group :production do
