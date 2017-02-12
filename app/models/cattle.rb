@@ -4,7 +4,7 @@ class Cattle < ActiveRecord::Base
   #获取七牛服务文件列表
   # Cattle.files_list
   def self.files_list(prefix= '',marker = '')
-    bucket = 'meteor' #指定空间
+    bucket = 'video' #指定空间
     limit = 10
     list_policy = Qiniu::Storage::ListPolicy.new(bucket,limit,prefix)
     list_policy.marker = marker  #加上对象
@@ -15,7 +15,7 @@ class Cattle < ActiveRecord::Base
   #云存储文件统计
   # Cattle.file_sum
   def self.file_sum()
-    bucket = 'meteor' #指定空间
+    bucket = 'video' #指定空间
     limit = 10000
     prefix= ''
     list_policy = Qiniu::Storage::ListPolicy.new(bucket,limit,prefix)
@@ -38,7 +38,7 @@ class Cattle < ActiveRecord::Base
   end
 
   def self.file_to_info(key)
-    code, result, response_headers = Qiniu::Storage.stat('meteor', key)
+    code, result, response_headers = Qiniu::Storage.stat('video', key)
     return result
   end
 
@@ -84,7 +84,7 @@ class Cattle < ActiveRecord::Base
 
   #更改文件在服务器的名称
   def self.rename_yun_file_name(old_name,new_name)
-    code, result, response_headers = Qiniu::Storage.move('meteor', old_name, 'meteor', new_name)
+    code, result, response_headers = Qiniu::Storage.move('video', old_name, 'video', new_name)
     if code != 614
       return true
     else
@@ -94,7 +94,7 @@ class Cattle < ActiveRecord::Base
 
   #删除服务器的文件
   def self.delete_yun_file(name)
-    code, result, response_headers = Qiniu::Storage.delete('meteor', name)
+    code, result, response_headers = Qiniu::Storage.delete('video', name)
     if code == 200
       return true
     else
