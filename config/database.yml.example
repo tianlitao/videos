@@ -1,10 +1,14 @@
-default: &default
-  adapter: postgresql
+development: &development
+  adapter: mysql2
+  encoding: utf8
   host: localhost
+  reconnect: false
+  database: video
   pool: 5
-  username: postgres
-  password: postgres
+  username: root
+  password: 
 
 production:
-  <<: *default
-  database: anye
+  <<: *development
+
+
