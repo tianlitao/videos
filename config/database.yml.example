@@ -6,7 +6,7 @@ development: &development
   database: video
   pool: 5
   username: root
-  password: 
+  password:
 
 production:
   <<: *development
