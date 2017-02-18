@@ -78,7 +78,7 @@ class Video < ActiveRecord::Base
   #视频时长判断获取
   def self.video_type_to_duration(type,code,time)
     return code_to_youku_info(code)['duration'] if type.to_i == 0
-    return time if type.to_i != 0
+    return time * 60 if type.to_i != 0
   end
 
   #视频的code根据类型判断生成

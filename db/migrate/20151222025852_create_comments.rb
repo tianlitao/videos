@@ -1,7 +1,7 @@
 class CreateComments < ActiveRecord::Migration
   def change
     create_table :comments do |t|
-      t.integer :user_id
+      t.integer :user_id,default: 0
       t.integer :video_id
       t.integer :reply_id
       t.integer :vote
