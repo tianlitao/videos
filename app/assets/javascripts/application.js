@@ -20,5 +20,5 @@
 //= require yepnope
 //= require cute.slider
 //= require cute.transitions.all
-//= require videojj
+//= require Iva
 //= require jquery.scroll
