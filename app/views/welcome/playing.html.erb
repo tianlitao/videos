@@ -52,7 +52,7 @@
 <%= render partial: 'shared/user_login' %>
 <script type="text/javascript" >
   var ivaInstance = new Iva('playerCnt', {
-    appkey:  <%= Settings.videojj %>,
+    appkey:  '<%= Settings.videojj %>',
     title: '<%= @video.title %>',
     video: '<%= code_type_to_url(@video.tv_code,@video.video_type)%>',
     cover: '<%= @video.cover %>',
