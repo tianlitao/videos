@@ -2,10 +2,10 @@
 xml.rss :version => '2.0' do
   cache [ :feed, params[:english], params[:all], @videos.count,@videos.map{|v| v.updated_at}.max ] do
     xml.channle do
-      xml.title '^轩^'
+      xml.title '^安然^'
       xml.language 'zh-CN'
-      xml.link 'http://huaxuan.link'
-      xml.description '在沉默中爆发'
+      xml.link 'http://115.28.226.236:8001/'
+      xml.description '安然'
       xml.total @videos.count
 
       for video in @videos

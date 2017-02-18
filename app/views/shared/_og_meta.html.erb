@@ -1,8 +1,8 @@
 <% content_for :meta do %>
     <meta property="og:title" content="<%= @video.title %>">
     <meta property="og:type" content="video">
-    <meta property="og:url" content="<%= 'http://huaxuan.link' + video_playing_path(@video.tv_code) %>">
+    <meta property="og:url" content="<%= 'http://115.28.226.236:8001/' + video_playing_path(@video.tv_code) %>">
     <meta property="og:image" content="<%= @video.cover %>">
-    <meta property="og:site_name" content="在沉默中爆发">
+    <meta property="og:site_name" content="安然">
     <meta property="og:description" content="<%= @video.summary %>">
 <% end %>
