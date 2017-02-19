@@ -44,7 +44,7 @@ class Video < ActiveRecord::Base
   end
 
   def self.show_video_from_youku(video_id)
-    params = { show_id: video_id,client_id:Settings.youku_client_id,show_videotype: '正片',count: 100}
+    params = { show_id: video_id,client_id:Settings.youku_client_id,show_videotype: '正片',count: 100,orderby: 'videoseq-desc'}
     response = $youku_conn.get '/v2/shows/videos.json', params
     return JSON.parse(response.body)
   end
