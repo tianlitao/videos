@@ -22,3 +22,4 @@
 //= require cute.transitions.all
 //= require Iva
 //= require jquery.scroll
+//= require common

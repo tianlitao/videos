@@ -1,5 +1,5 @@
 <%= content_for(:title, @video.title + ' | Koogle') %>
-<%= render partial: 'shared/og_meta', video:@video %>
+<%= render partial: 'shared/og_meta', video: @video %>
 <div class="container">
   <div class="grid">
     <div class="display">
@@ -8,7 +8,7 @@
       </div>
       <div class="player-poster">
         <p><%= video_time @video.duration %>
-          <span class="v-time"><%= @video.created_at.strftime('%m/%d %H:%M')%></span></p>
+          <span class="v-time"><%= @video.created_at.strftime('%m/%d %H:%M') %></span></p>
       </div>
       <div class="player">
         <div style="padding-left: 5px;padding-right: 5px;padding-top: 5px">
@@ -18,40 +18,44 @@
     </div>
   </div>
 </div>
-<div class="container">
-  <div class="grid">
-    <div class="cube">
-      <div class="relatives">
-        相关推荐
-        <% sql_query = Video.find_by_sql("select * from videos where(id !=#{@video.id}) and column_id = #{@video.column_id} order by rand() limit 3") %>
-        <%= render partial: 'shared/video_related', locals: {related: sql_query}%>
-      </div>
-      <div class="commend">
-        <h4>看客评论</h4>
-        <div>
-          <div id="layout" data-tracking-area="layout">
-            <div id="global-alert"></div>
-            <section id="conversation" data-role="main" data-tracking-area="main">
-              <div id="posts">
-                <!--本站用户发布评论-->
-                <%= render partial: 'shared/publish_comments' %>
-                <div id="footer" data-tracking-area="footer"></div>
-                <ul id="post-list" class="post-list" style="padding-left: 0px">
-                  <!--本站用户评论-->
-                  <%= render partial: 'shared/user_comments' %>
-                </ul>
+<% unless @video.new_record? %>
+
+    <div class="container">
+      <div class="grid">
+        <div class="cube">
+          <div class="relatives">
+            相关推荐
+            <% sql_query = Video.find_by_sql("select * from videos where(id !=#{@video.id}) and column_id = #{@video.column_id} order by rand() limit 3") %>
+            <%= render partial: 'shared/video_related', locals: {related: sql_query} %>
+          </div>
+          <div class="commend">
+            <h4>看客评论</h4>
+            <div>
+              <div id="layout" data-tracking-area="layout">
+                <div id="global-alert"></div>
+                <section id="conversation" data-role="main" data-tracking-area="main">
+                  <div id="posts">
+                    <!--本站用户发布评论-->
+                    <%= render partial: 'shared/publish_comments' %>
+                    <div id="footer" data-tracking-area="footer"></div>
+                    <ul id="post-list" class="post-list" style="padding-left: 0px">
+                      <!--本站用户评论-->
+                      <%= render partial: 'shared/user_comments' %>
+                    </ul>
+                  </div>
+                </section>
               </div>
-            </section>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+<% end %>
+
 <!--登录浮层-->
 <%= render partial: 'shared/user_login' %>
 <script charset="utf-8" async="" src="http://cytroncdn.videojj.com/release/6.9.0/cytron.core.js"></script>
-<script type="text/javascript" >
+<script type="text/javascript">
 
   var ivaInstance = new Iva(
     'playerCnt',//父容器id

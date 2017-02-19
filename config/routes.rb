@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   resources :comments
   match '/playing/(:tv_code).html',to: 'welcome#playing', via: :get, as: :video_playing
+  match '/search_playing/(:video_type)/(:tv_code).html',to: 'welcome#search_playing', via: :get, as: :video_search_playing
+  match '/search/(:video_type)',to: 'welcome#search', via: :get, as: :video_search
+  match '/check_search/(:video_type)/(:video_id)',to: 'welcome#check_search', via: :get, as: :check_search
   match '/channel/:english',to: 'welcome#channel', via: :get, as: :video_channel
   match '/videos/get_channel_more',to: 'welcome#get_channel_more', via: :get
   match '/videos/get_index_more',to: 'welcome#get_index_more', via: :get

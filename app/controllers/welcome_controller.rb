@@ -4,6 +4,7 @@ class WelcomeController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: [:get_channel_more]
 
   def index
+
     @channel = Column.hexie.shunxu
     @videos = Video.recent.hexie.paginate(:per_page=>9,:page=> 1)
   end
@@ -29,6 +30,42 @@ class WelcomeController < ApplicationController
     else
       redirect_to root_path
     end
+  end
+
+  def search
+    if params[:video_type].present? && params[:q].present?
+      if params[:video_type] == '0'
+        @videos = Video.search_from_youku(params[:q])
+      end
+    else
+      redirect_to :back
+    end
+  end
+
+  def check_search
+    if params[:video_type].present? && params[:video_id].present?
+      if params[:video_type] == '0'
+        @videos = Video.show_video_from_youku(params[:video_id])
+      end
+    else
+      redirect_to :back
+    end
+  end
+
+  def search_playing
+    if params[:video_type].present? && params[:tv_code].present?
+      case params[:video_type]
+        when '0'
+          video = Video.code_to_youku_info(params[:tv_code])
+          @video = Video.new(id: 0,column_id:3,recommend: 0,video_type: 0,tv_code: params[:tv_code],duration: video['duration'],
+            title: video['title'],cover: video['thumbnail'],created_at: video['published'].to_time,updated_at: video['published'])
+          render action: :playing
+        else
+      end
+    else
+      redirect_to :back
+    end
+
   end
 
   def get_channel_more

@@ -1,0 +1,37 @@
+<%= content_for(:title,  + ' | Koogle') %>
+<div class="container">
+  <div class="grid">
+    <div class="programa channel">
+      <div class="side">
+        <span><img src="<%= image_url('toutu/videos.png') %>" style="width: 30px;height: 27px;padding-bottom: 2px"></span>
+          <%= @videos['videos'].size %> 个视频</span>
+      </div>
+      <div class="programa-list">
+        <ul>
+          <li><a href="/"><i class="fa fa-home"></i>&nbsp;&nbsp;首页</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="video">
+      <ul class="video-list">
+        <% @videos['videos'].each do |video| %>
+          <li class="video-item">
+            <a class="animated" href="<%= video_search_playing_path(params[:video_type],video['id'])%>">
+              <div class="video-poster"><img src="<%= video['thumbnail'] %>" alt=""></div>
+              <div class="video-play">
+                <h4><span><img src="<%= Settings.qiniu_cdn_host + 'img_zqr71PLUiHDljFmKnI6t.png' %>"style="width: 55px;height: 65px;padding-bottom: 10px;"></span></h4>
+              </div>
+              <div class="video-info">
+                <p><%=  video['title'] %></p>
+                <p><i class="fa fa-clock-o"></i>&nbsp;<%= video_time video['duration'] %>
+                  <span class="v-time"><i class="fa fa-calendar"></i>&nbsp;<%= video['published'].to_time.strftime('%m/%d %H:%M') rescue '' %></span>
+                </p>
+              </div>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+  </div>
+</div>

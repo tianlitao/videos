@@ -25,12 +25,27 @@ class Video < ActiveRecord::Base
   scope :recent, ->{order(created_at: :desc)}
   scope :hexie, ->{where('video_type != 3')}
 
+  ##视频站
+  TYPE = {0 => '优酷视频',1 => '腾讯视频',2 => '爱奇艺视频',3 => '爱情动作片'}
+
   #根据code获取优酷的视频信息 Video.def self.code_to_youku_info
   #{"id"=>"XMTM5MDUyNDY2MA==", "title"=>"忽必烈的二次创业 148", "thumbnail"=>"http://r1.ykimg.com/05420408564D93596A0A4804DD28AA95", "thumbnail_v2"=>"http://r1.ykimg.com/05420408564D93596A0A4804DD28AA95", "duration"=>"3348.18", "comment_count"=>"894", "favorite_count"=>"0", "up_count"=>"3089", "down_count"=>"85", "published"=>"2015-11-19 17:45:00", "copyright_type"=>"original", "public_type"=>"all", "state"=>"normal", "streamtypes"=>["hd2", "flvhd", "hd", "3gphd", "mp5hd", "mp5hd2"], "operation_limit"=>[], "category"=>"资讯", "view_count"=>462533, "tags"=>"罗振宇,罗辑思维,忽必烈,挑战,元朝,繁荣", "paid"=>0, "link"=>"http://v.youku.com/v_show/id_XMTM5MDUyNDY2MA==.html", "player"=>"http://player.youku.com/player.php/sid/XMTM5MDUyNDY2MA==/partnerid/9f88fcd420d33601/v.swf", "user"=>{"id"=>"128391495", "name"=>"罗辑思维", "link"=>"http://i.youku.com/u/UNTEzNTY1OTgw"}}
   # Video.code_to_youku_info('XMTM5MDUyNDY2MA==')
   def self.code_to_youku_info(code)
     params = { video_id:code,client_id:Settings.youku_client_id}
     response = $youku_conn.get '/v2/videos/show_basic.json', params
+    return JSON.parse(response.body)
+  end
+
+  def self.search_from_youku(q)
+    params = { keyword: q,client_id:Settings.youku_client_id,count: 100}
+    response = $youku_conn.get '/v2/searches/show/by_keyword.json', params
+    return JSON.parse(response.body)
+  end
+
+  def self.show_video_from_youku(video_id)
+    params = { show_id: video_id,client_id:Settings.youku_client_id,show_videotype: '正片',count: 100}
+    response = $youku_conn.get '/v2/shows/videos.json', params
     return JSON.parse(response.body)
   end
 
