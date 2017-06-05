@@ -15,24 +15,32 @@
     <script src="./全网VIP视频在线解析_files/bootstrap.min.js"></script>
     <link rel="shortcut icon" href="http://www.sjzvip.com/favicon.ico">
     <link rel="bookmark" href="http://www.sjzvip.com/favicon.ico">
-    <script type="text/javascript">eval(function (p, a, c, k, e, d) {
-      e = function (c) {
-        return (c < a ? "" : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c.toString(36))
-      };
-      if (!''.replace(/^/, String)) {
-        while (c--)d[e(c)] = k[c] || e(c);
-        k = [function (e) {
-          return d[e]
-        }];
-        e = function () {
-          return '\\w+'
-        };
-        c = 1
+    <script type="text/javascript">
+      function dihejk() {
+        var diz = document.getElementById("url").value;
+        var jkurl = document.getElementById("jk");
+        var jk = document.getElementById("jk").selectedIndex;
+        var jkv = jkurl.options[jk].value;
+        var cljurl = document.getElementById("player");
+        cljurl.src = jkv + diz
       }
-      ;
-      while (c--)if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]);
-      return p
-    }('b a(){0 6=1.2("9").4;0 5=1.2("3");0 3=1.2("3").c;0 8=5.e[3].4;0 7=1.2("f");7.d=8+6}', 16, 16, 'var|document|getElementById|jk|value|jkurl|diz|cljurl|jkv|url|dihejk|function|selectedIndex|src|options|player'.split('|'), 0, {}))</script>
+
+      function GetQueryString(name)
+      {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+      }
+      $(function(){
+        if(GetQueryString("url") != null){
+          url = GetQueryString("url")
+          $('#url').val(url)
+          dihejk()
+        }
+
+      })
+
+    </script>
 </head>
 <body><br>
 <div class="container" style="padding-top:0px;" id="wbk">
